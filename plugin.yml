@@ -1,0 +1,17 @@
+name: SignTP
+api: [1.0.0, 2.0.0, 3.0.0] #Not compatible with Pocketmine. Only compatible with ImagicalMine-IC
+version: 1.0
+load: POSTWORLD
+main: SignTP\Main
+author: remote_vase
+
+commands:
+ generate:
+  description: Generate new world (testing only)
+  usage: "Usage: /generate <worldname>"
+  permission: signtp.command.generate
+
+permissions:
+ signtp.command.generate:
+  description: "Allows the user to run the generate command"
+  default: op
