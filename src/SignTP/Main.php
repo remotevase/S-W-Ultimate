@@ -1,5 +1,7 @@
 <?php
+
 namespace SignTP;
+
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\Server;
@@ -8,18 +10,19 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\math\Vector3;
 use pocketmine\tile\Sign;
 use pocketmine\event\block\SignChangeEvent;
-/** Not currently used but may be later used  */
 use pocketmine\level\Position;
 use pocketmine\entity\Entity;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\item\Item;
 use pocketmine\tile\Tile;
+
 class Main extends PluginBase implements Listener{
-    private $api, $server, $path;
+	
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
+    
     public function playerBlockTouch(PlayerInteractEvent $event){
         if($event->getBlock()->getID() == 323 || $event->getBlock()->getID() == 63 || $event->getBlock()->getID() == 68){
             $sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
@@ -36,23 +39,24 @@ class Main extends PluginBase implements Listener{
                         $event->getPlayer()->sendMessage("[SignTP] Teleporting...");
                         $event->getPlayer()->teleport(Server::getInstance()->getLevelByName($mapname)->getSafeSpawn());
                     }else{
-                    if($sign[0]=='[COORD]'){
-                if(empty($sign[1]) !== true){
-                    $x = $sign[1];
-                    $y = $sign[2];
-                    $z = $sign[3];
-                    $name = $player->getName;
-                    $this->getServer()->dispatchCommand(new ConsoleCommandSender(), "tp $name $x $y $z");
-                    $event->getPlayer()->sendMessage("[SignTP] Teleporting to  '".$x."' '".$y."' '".$z."'");
-                }else{
-                	$event->getPlayer()->sendMessage("[SignTP] World '".$mapname."' not found.");
+                        if($sign[0]=='[COORD]'){
+                            if(empty($sign[1]) !== true){
+                                $x = $sign[1];
+                                $y = $sign[2];
+                                $z = $sign[3];
+                                $name = $player->getName();
+                                $event->getPlayer()->teleport(new Position($x,$y,$z));
+                                $event->getPlayer()->sendMessage("[SignTP] Teleporting to  $x $y $z");
+                            }else{
+                	           $event->getPlayer()->sendMessage("[SignTP] World '".$mapname."' not found.");
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-   }
-  }
- }
+    
     public function tileupdate(SignChangeEvent $event){
         if($event->getBlock()->getID() == 323 || $event->getBlock()->getID() == 63 || $event->getBlock()->getID() == 68){
             //Server::getInstance()->broadcastMessage("lv1");
