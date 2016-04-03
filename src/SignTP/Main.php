@@ -73,7 +73,7 @@ class Main extends PluginBase implements Listener{
                         //Server::getInstance()->broadcastMessage("lv4");
                         if(Server::getInstance()->loadLevel($sign[1])!==false){
                             //Server::getInstance()->broadcastMessage("lv5");
-                            $event->getPlayer()->sendMessage("[SignTP] Sign to world '".$mapname."' created. Time to Teleport!");
+                            $event->getPlayer()->sendMessage("[SignTP] Sign to world '".$sign[1]."' created. Time to Teleport!");
                             return true;
                         }else{
                         if($sign[0]=='[COORD]'){
@@ -82,13 +82,13 @@ class Main extends PluginBase implements Listener{
                     //Server::getInstance()->broadcastMessage("lv3");
                     if(empty($sign[1]) !==true){
                     	}else{
-                            $event->getPlayer()->sendMessage("[SignTP] Sign to '".$x."' '".$y."' '".$z."' created. Time to Teleport!");
+                            $event->getPlayer()->sendMessage("[SignTP] Sign to $x $y $z created. Time to Teleport!");
                             return true;
                         			}
                 			}
                         	}
                         }
-                        $event->getPlayer()->sendMessage("[SignTP] World '".$mapname."' does not exist!");
+                        $event->getPlayer()->sendMessage("[SignTP] World '".$sign[1]."' does not exist!");
                         //Server::getInstance()->broadcastMessage("f4");
                         $event->setLine(0,"[SignTP:Broken]");
                         return false;
