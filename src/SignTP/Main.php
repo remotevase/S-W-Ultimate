@@ -56,7 +56,52 @@ class Main extends PluginBase implements Listener{
             }
         }
     }
-    
+    public function onCommand(CommandSender $sender, Command $command, $label, array $args){
+        switch(strtolower($command->getName())){
+            case "generate":
+            if($sender->isOp(){
+                return $this->generateCMD($sender, $cmd, $label, $args);
+                }else{
+                    $sender->sendMessage(C::RED."You must be op to run this command");
+                	}
+             case "tpw":
+             	if($sender->isOp(){
+             		if(isset($args[1])) {
+				$world = $args[1];
+				$player = null;
+				if(isset($args[2]))
+					$player = $this->getServer()->getPlayer($args[2]);
+				if(!(isset($args[2]))) {
+						if(!($sender->getLevel() == $this->getServer()->getLevelByName($world))) {
+							if($this->getServer()->isLevelLoaded($world)) {
+								$sender->sendMessage("[SignTP] Teleporting you to world " . $world . "...");
+								$world = $this->getServer()->getLevelByName($world);
+								$sender->teleport($world->getSpawnLocation());
+							} else
+								$sender->sendMessage("[SignTP] Unable to teleport you to " . $world . " as it is not loaded!");
+						} else
+							$sender->sendMessage("[SignTP] You are already in " . $world . "!");
+				} else {
+						if($player->isOnline()) {
+							if($player->getLevel() == $this->getServer()->getLevelByName($world))
+								$sender->sendMessage("[SignTP] " . $player . " is already in " . $world . "!");
+							}else{
+								if($this->getServer()->isLevelLoaded($world)) {
+									$player->sendMessage("[SignTP] Teleporting you to " . $world . " because " . $sender . "forced me to \n Sorry, I'm just a plugin. I cannot disobey my master");
+									$world = $this->getServer()->getLevelByName($world);
+									$player->teleport($world->getSpawnLocation());
+									$sender->sendMessage("[SignTP] " . $player . " has been teleported to " . $world . "!");
+								} else
+									$sender->sendMessage("[SignTP] Unable to teleport " . $player . " as\nlevel " . $world . " is not loaded!");
+						} else
+							$sender->sendMessage("[SignTP] " . $player . " is offline! \n Try again some other time!");
+				}
+				return true;
+			}
+		}
+             	}
+                }
+            }
     public function tileupdate(SignChangeEvent $event){
         if($event->getBlock()->getID() == 323 || $event->getBlock()->getID() == 63 || $event->getBlock()->getID() == 68){
             //Server::getInstance()->broadcastMessage("lv1");
