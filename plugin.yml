@@ -1,8 +1,8 @@
-name: SignTP
+name: S+W Ultimate
 api: [1.0.0, 2.0.0, 3.0.0] #Not compatible with Pocketmine. Only compatible with ImagicalMine-IC
 version: 1.0
 load: POSTWORLD
-main: SignTP\Main
+main: S+W-Ultimate\Main
 author: remote_vase
 
 commands:
