@@ -1,4 +1,4 @@
-SignTP v1.0 <br>
+S&W Ultimate v1.0 (Stands for Sign and World Management Ultimate <br>
 ========== <br>
  <br>
 ## Usage <br>
@@ -15,3 +15,5 @@ Coordinate signs <br>
    - \<x position> <br>
    - \<y position> <br>
    - \<z position> <br>
+   - 
+   Working generate command also coming soon
