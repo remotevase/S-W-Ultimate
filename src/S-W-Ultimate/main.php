@@ -1,6 +1,6 @@
 <?php
 
-namespace SignTP;
+namespace S-W-Ultimate;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
@@ -33,10 +33,10 @@ class Main extends PluginBase implements Listener{
             if($sign[0]=='[WORLD]'){
                 if(empty($sign[1]) !== true){
                     $mapname = $sign[1];
-                    $event->getPlayer()->sendMessage("[SignTP] Preparing world '".$mapname."'");
+                    $event->getPlayer()->sendMessage("[Signs Ultimate] Preparing world '".$mapname."'");
                     //Prevents most crashes
                     if(Server::getInstance()->loadLevel($mapname) != false){
-                        $event->getPlayer()->sendMessage("[SignTP] Teleporting...");
+                        $event->getPlayer()->sendMessage("[Signs Ultimate] Teleporting...");
                         $event->getPlayer()->teleport(Server::getInstance()->getLevelByName($mapname)->getSafeSpawn());
                     }else{
                         if($sign[0]=='[COORD]'){
@@ -46,9 +46,9 @@ class Main extends PluginBase implements Listener{
                                 $z = $sign[3];
                                 $name = $player->getName();
                                 $event->getPlayer()->teleport(new Position($x,$y,$z));
-                                $event->getPlayer()->sendMessage("[SignTP] Teleporting to  $x $y $z");
+                                $event->getPlayer()->sendMessage("[Signs Ultimate] Teleporting to  $x $y $z");
                             }else{
-                	           $event->getPlayer()->sendMessage("[SignTP] World '".$mapname."' not found.");
+                	           $event->getPlayer()->sendMessage("[Signs Ultimate] World '".$mapname."' not found.");
                             }
                         }
                     }
@@ -73,7 +73,7 @@ class Main extends PluginBase implements Listener{
                         //Server::getInstance()->broadcastMessage("lv4");
                         if(Server::getInstance()->loadLevel($sign[1])!==false){
                             //Server::getInstance()->broadcastMessage("lv5");
-                            $event->getPlayer()->sendMessage("[SignTP] Sign to world '".$sign[1]."' created. Time to Teleport!");
+                            $event->getPlayer()->sendMessage("[Signs Ultimate] Sign to world '".$sign[1]."' created. Time to Teleport!");
                             return true;
                         }else{
                         if($sign[0]=='[COORD]'){
@@ -82,25 +82,25 @@ class Main extends PluginBase implements Listener{
                     //Server::getInstance()->broadcastMessage("lv3");
                     if(empty($sign[1]) !==true){
                     	}else{
-                            $event->getPlayer()->sendMessage("[SignTP] Sign to $x $y $z created. Time to Teleport!");
+                            $event->getPlayer()->sendMessage("[Signs Ultimate] Sign to $x $y $z created. Time to Teleport!");
                             return true;
                         			}
                 			}
                         	}
                         }
-                        $event->getPlayer()->sendMessage("[SignTP] World '".$sign[1]."' does not exist!");
+                        $event->getPlayer()->sendMessage("[Signs Ultimate] World '".$sign[1]."' does not exist!");
                         //Server::getInstance()->broadcastMessage("f4");
-                        $event->setLine(0,"[SignTP:Broken]");
+                        $event->setLine(0,"[Sign:Broken]");
                         return false;
                     }
-				$event->getPlayer()->sendMessage("[SignTP] World name not set");
+				$event->getPlayer()->sendMessage("[Signs Ultimate] World name not set");
                     //Server::getInstance()->broadcastMessage("f3");
-                    $event->setLine(0,"[SignTP:Broken]");
+                    $event->setLine(0,"[Sign:Broken]");
                     return false;
                 }
-            $event->getPlayer()->sendMessage("[SignTP] You must be an OP to make a sign that teleports");
+            $event->getPlayer()->sendMessage("[Signs Ultimate] You must be an OP to make a sign that teleports");
             //Server::getInstance()->broadcastMessage("f2");
-            $event->setLine(0,"[SignTP:Broken]");
+            $event->setLine(0,"[Sign:Broken]");
             return false;
             }
         }
