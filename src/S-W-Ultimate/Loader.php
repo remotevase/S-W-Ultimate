@@ -22,12 +22,14 @@ namespace S-W-Ultimate;
 use S-W-Ultimate\signs\worldtp;
 use S-W-Ultimate\signs\coordtp;
 use S-W-Ultimate\signs\status;
-use S-W-Ultimate\signs\generate;
+use S-W-Ultimate\signs\seedgenerate;
+use S-W-Ultimate\signs\typegenerate;
 use S-W-Ultimate\signs\cmd-non-op; #Can by tapped by any player, even if non-op player. Only runs non-op commands.
 use S-W-Ultimate\signs\cmd-op; #Can only by tapped by ops. Runs any command, even op only commands
 use S-W-Ultimate\signs\cmd-all; #Can by tapped by any player, even if non-op player. Runs any command.
 
-use S-W-Ultimate\worldcmd\generate;
+use S-W-Ultimate\worldcmd\seedgenerate;
+use S-W-Ultimate\worldcmd\typegenerate;
 use S-W-Ultimate\worldcmd\worldtp;
 use S-W-Ultimate\worldcmd\coordtp;
 use S-W-Ultimate\worldcmd\worldload;
