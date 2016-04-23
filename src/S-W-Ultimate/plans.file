@@ -44,3 +44,18 @@ SIGNS
       Line 2: Command
       Line 3: Anything
       Line 4: Anything
+WORLD MANAGEMENT COMMANDS
+      /seedgenerate <seed> <worldname>
+            Generate a world using a the seed specified.
+      
+      /typegenerate <type> <worldname>
+            Generate a world using the type specified. Types will be in another file.
+ 
+      /worldtp <worldname>
+            Teleport yourself to the world specified.
+
+      /coordtp <x> <y> <z>
+            Teleport yourself to the coordinates specified.
+
+      /loadworld <worldname>
+            Load the world specified.
