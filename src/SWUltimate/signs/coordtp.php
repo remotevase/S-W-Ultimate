@@ -16,8 +16,8 @@
 *  @author remote_vase
 *  
 */
-namespace S-W-Ultimate\signs;
-use S-W-Ultimate\Loader;
+namespace SWUltimate\signs;
+use SWUltimate\Loader;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\Server;
