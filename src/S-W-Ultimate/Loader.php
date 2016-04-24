@@ -43,7 +43,7 @@ class Loader extends PluginBase extends Listener{
     
     const AUTHOR = "remote_vase";
     const VERSION = "1.0.0";
-    const PREFIX = C::BLACK . "[" . C::AQUA . "S&WUltimate" . C::BLACK . "]";
+    const PREFIX = C::BLACK . "[" . C::AQUA . "S&W Ultimate" . C::BLACK . "]";
     
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
