@@ -27,7 +27,7 @@ use pocketmine\utils\TextFormat as C;
 use pocketmine\event\Listener;
 use pocketmine\utils\Config;
 
-class Loader extends PluginBase extends Listener{
+class Loader extends PluginBase implements Listener{
     
     const AUTHOR = "remote_vase";
     const VERSION = "1.0.0";
