@@ -39,6 +39,7 @@ use pocketmine\tile\Tile;
 class worldtp extends PluginBase implements Listener{
 
     public function playerBlockTouch(PlayerInteractEvent $event){
+        $prefix = C::BLACK . "[" . C::AQUA . "S&W Ultimate" . C::BLACK . "]";
         if($event->getBlock()->getID() == 323 || $event->getBlock()->getID() == 63 || $event->getBlock()->getID() == 68){
             $sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
             if(!($sign instanceof Sign)){
