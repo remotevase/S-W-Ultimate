@@ -21,6 +21,18 @@ namespace SWUltimate;
 
 use SWUltimate\signs\worldtp;
 use SWUltimate\signs\coordtp;
+use SWUltimate\signs\status;
+use SWUltimate\signs\seedgenerate;
+use SWUltimate\signs\typegenerate;
+use SWUltimate\signs\cmd-non-op; #Can by tapped by any player, even if non-op player. Only runs non-op commands.
+use SWUltimate\signs\cmd-op; #Can only by tapped by ops. Runs any command, even op only commands
+use SWUltimate\signs\cmd-all; #Can by tapped by any player, even if non-op player. Runs any command.
+
+use SWUltimate\worldcmd\seedgenerate;
+use SWUltimate\worldcmd\typegenerate;
+use SWUltimate\worldcmd\worldtp;
+use SWUltimate\worldcmd\coordtp;
+use SWUltimate\worldcmd\worldload;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat as C;
