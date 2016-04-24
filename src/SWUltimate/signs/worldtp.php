@@ -17,86 +17,53 @@
 *  
 */
 namespace SWUltimate\signs;
-
-use SWUltimate\Loader;
-
+use SWUltimate\Loader
+use pocketmine\command\{Command, CommandSender};
+use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\event\Listener;
-use pocketmine\Server;
-use pocketmine\command\{Command, CommandSender, ConsoleCommandSender};
-use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\math\Vector3;
-use pocketmine\tile\Sign;
-use pocketmine\event\block\SignChangeEvent;
-use pocketmine\level\Position;
-use pocketmine\entity\Entity;
-use pocketmine\event\block\BlockPlaceEvent;
-use pocketmine\event\block\BlockBreakEvent;
-use pocketmine\item\Item;
-use pocketmine\tile\Tile;
+use pocketmine\utils\Config;
+use pocketmine\level\{Position, Level};
+use pocketmine\utils\TextFormat as C;
 
-
-class worldtp extends Loader implements Listener{
-
-    public function playerBlockTouch(PlayerInteractEvent $event){
-        $prefix = C::BLACK . "[" . C::AQUA . "S&W Ultimate" . C::BLACK . "]";
-        if($event->getBlock()->getID() == 323 || $event->getBlock()->getID() == 63 || $event->getBlock()->getID() == 68){
-            $sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
-            if(!($sign instanceof Sign)){
-                return;
-            }
-            $sign = $sign->getText();
-            if($sign[0]=='[WORLD]'){
-                if(empty($sign[1]) !== true){
-                    $mapname = $sign[1];
-                    $event->getPlayer()->sendMessage($prefix . " Preparing world '".$mapname."'");
-                    //Prevents most crashes
-                    if(Server::getInstance()->loadLevel($mapname) != false){
-                        $event->getPlayer()->sendMessage($prefix . " Teleporting...");
-                        $event->getPlayer()->teleport(Server::getInstance()->getLevelByName($mapname)->getSafeSpawn());
-                            }else{
-                	           $event->getPlayer()->sendMessage($prefix . " World '".$mapname."' not found.");
-                    }
+class worldtp extends PluginBase{
+    public $homeData;
+    public function onCommand(CommandSender $sender, Command $command, $label, array $args){
+        switch(strtolower($command->getName())){
+            case "home":
+            if($sender instanceof Player){
+                $home = $this->homeData->get($args[0]);
+                if($home["world"] instanceof Level){
+                    $sender->setLevel($home["world"]);
+                    $sender->teleport(new Position($home["x"], $home["y"], $home["z"]));
+                    $sender->sendMessage(C::BLUE."You teleported home.");
+                }else{
+                    $sender->sendMessage(C::RED."That world is not loaded or Doesn't Exist!");
                 }
             }
+            break;
+            case "sethome":
+            if ($sender instanceof Player){
+                $x = $sender->x;
+                $y = $sender->y;
+                $z = $sender->z;
+                $level = $sender->getLevel();
+                // $args[0] is the Name of the house -> /sethome <name>
+                $this->homeData->set($args[0], array(
+                    "x" => $x,
+                    "y" => $y,
+                    "z" => $z,
+                    "world" => $level,
+                ));
+                $sender->sendMessage(C::GREEN."Your home is set at coordinates\n" . "X:" . C::YELLOW . $x . C::GREEN . "\nY:" . C::YELLOW . $y . C::GREEN . "\nZ:" . C::YELLOW . $z . C::GREEN . "\nUse /home < ". $args[0] ." > to teleport to this home!");
+                $this->getLogger()->info($sender->getName() . " has set their home in world " . $sender->getLevel()->getName());
+            }else{
+                    $sender->sendMessage(C::RED. "Please run command in game.");
+                    return true;
+                }
+                break;
+            default:
+                return false;
         }
     }
-    
-    public function tileupdate(SignChangeEvent $event){
-        if($event->getBlock()->getID() == 323 || $event->getBlock()->getID() == 63 || $event->getBlock()->getID() == 68){
-            //Server::getInstance()->broadcastMessage("lv1");
-            $sign = $event->getPlayer()->getLevel()->getTile($event->getBlock());
-            if(!($sign instanceof Sign)){
-                return true;
-            }
-            $sign = $event->getLines();
-            if($sign[0]=='[WORLD]'){
-                //Server::getInstance()->broadcastMessage("lv2");
-                if($event->getPlayer()->isOp()){
-                    //Server::getInstance()->broadcastMessage("lv3");
-                    if(empty($sign[1]) !==true){
-                        //Server::getInstance()->broadcastMessage("lv4");
-                        if(Server::getInstance()->loadLevel($sign[1])!==false){
-                            //Server::getInstance()->broadcastMessage("lv5");
-                            $event->getPlayer()->sendMessage($prefix . " Sign to world '".$sign[1]."' created. Time to Teleport!");
-                            return true;
-                        }
-                        $event->getPlayer()->sendMessage($prefix . " World '".$sign[1]."' does not exist!");
-                        //Server::getInstance()->broadcastMessage("f4");
-                        $event->setLine(0,"[Broken Sign]");
-                        return false;
-                    }
-				$event->getPlayer()->sendMessage($prefix . " World name not set");
-                    //Server::getInstance()->broadcastMessage("f3");
-                    $event->setLine(0,"[Broken Sign]");
-                    return false;
-                }
-            $event->getPlayer()->sendMessage($prefix . " You must be an OP to make a sign that teleports");
-            //Server::getInstance()->broadcastMessage("f2");
-            $event->setLine(0,"[Broken Sign]");
-            return false;
-            }
-        }
-        return true;
     }
 }
