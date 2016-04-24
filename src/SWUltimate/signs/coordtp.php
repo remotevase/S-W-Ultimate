@@ -35,6 +35,10 @@ use pocketmine\tile\Tile;
 use pocketmine\utils\TextFormat as C;
 
 class coordtp extends Loader implements Listener{
+
+    public function onEnable(){
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
     
     public function playerBlockTouch(PlayerInteractEvent $event){
         $prefix = C::BLACK . "[" . C::AQUA . "S&W Ultimate" . C::BLACK . "]";
