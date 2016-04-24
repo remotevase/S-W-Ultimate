@@ -17,10 +17,10 @@
 *  
 */
 
-namespace S-W-Ultimate;
+namespace SWUltimate;
 
-use S-W-Ultimate\signs\worldtp;
-use S-W-Ultimate\signs\coordtp;
+use SWUltimate\signs\worldtp;
+use SWUltimate\signs\coordtp;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat as C;
