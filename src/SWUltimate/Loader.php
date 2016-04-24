@@ -47,9 +47,6 @@ class Loader extends PluginBase implements Listener{
     
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->saveResource("homes.yml");
-        @mkdir($this->getDataFolder());
-        $this->homeData = new Config($this->getDataFolder()."homes.yml", Config::YAML, array());
         $this->getLogger()->info(self::PREFIX . C::GREEN . "Enabled!");
     }
     public function getPrefix(){
@@ -63,8 +60,6 @@ class Loader extends PluginBase implements Listener{
     }
     public function onDisable(){
         $this->getLogger()->info(self::PREFIX . C::RED . "Disabled!");
-        $this->saveResource("homes.yml");
-        $this->getLogger()->info(C::YELLOW."All homes have saved!");
     }
     
 }
