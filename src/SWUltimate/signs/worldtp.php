@@ -27,6 +27,9 @@ use pocketmine\utils\TextFormat as C;
 
 class worldtp extends PluginBase{
     public $homeData;
+    public function onEnable(){
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
     public function onCommand(CommandSender $sender, Command $command, $label, array $args){
         switch(strtolower($command->getName())){
             case "home":
