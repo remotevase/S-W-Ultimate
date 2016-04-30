@@ -36,6 +36,9 @@ use pocketmine\utils\TextFormat as C;
 
 class coordtp extends Loader implements Listener{
 
+	public function __construct(Loader $plugin){
+			$this->plugin = $plugin;
+		}
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
