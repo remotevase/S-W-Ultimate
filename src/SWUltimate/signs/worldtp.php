@@ -17,7 +17,7 @@
 *  
 */
 namespace SWUltimate\signs;
-use SWUltimate\Loader
+use SWUltimate\Loader;
 use pocketmine\command\{Command, CommandSender};
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
@@ -27,6 +27,11 @@ use pocketmine\utils\TextFormat as C;
 
 class worldtp extends PluginBase{
     public $homeData;
+    
+    public function __construct(Loader $plugin){
+		$this->plugin = $plugin;
+	}
+    
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
